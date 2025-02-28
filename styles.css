@@ -1,0 +1,174 @@
+body {
+    background: linear-gradient(90deg, #000000, #D3D3D3);
+    padding: 5vh;
+}
+
+#input {
+    width: 400px;
+    background: linear-gradient(145deg, #2a2a2a, #404040);
+    border: 3px solid #1a1a1a;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    padding: 15px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.cash-register {
+    width: 400px;
+    height: 300px;
+    background: linear-gradient(145deg, #2a2a2a, #404040);
+    border: 3px solid #1a1a1a;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    position: absolute;
+    padding: 15px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+  }
+
+  
+  .display {
+    transform: translateY(-12vh);
+    width: 50%;
+    height: 50px;
+    margin: 15px auto;
+    background-color: #152815;
+    border: 2px solid #0a0a0a;
+    border-radius: 5px;
+    text-align: right;
+    font-family: 'Digital', monospace;
+    font-size: 1.8em;
+    line-height: 50px;
+    padding-right: 10px;
+    color: #00ff00;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+    z-index: 1;
+  }
+
+  #cash {
+    display: block;
+    transform:none;
+    text-align: center;
+    font-family: 'Digital', monospace;
+    font-size: 1.8em;
+    line-height: 50px;
+  }
+
+  #change-due {
+    position:absolute;
+    transform: translateX(-25vw);
+    color: white;
+    font-family: 'Digital', monospace;
+    font-size: 1.8em;
+  }
+
+  /* For Chrome, Safari, Edge, Opera */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* For Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+  .display-neck {
+    position: absolute;
+    transform:translate(6vw, -10vh);
+    width: 10%;
+    height: 12vh;
+    margin: 15px auto;
+    background: linear-gradient(to bottom, #4a4a4a, #3a3a3a);
+    border-top: 3px solid #1a1a1a;
+    border-radius: 5px;
+    text-align: right;
+    font-family: 'Digital', monospace;
+    font-size: 1.8em;
+    line-height: 50px;
+    padding-right: 10px;
+    color: #00ff00;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+    z-index: 0;
+  }
+  
+  .keypad {
+    width: 100px;
+    height: 50%;
+    margin-right: 10px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+    padding: 5px;
+  }
+  
+  .key {
+    background: linear-gradient(145deg, #4a4a4a, #3a3a3a);
+    border: 1px solid #1a1a1a;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 1em;
+    cursor: pointer;
+    color: white;
+    padding: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    transition: all 0.2s ease;
+  }
+  
+  .key:active {
+    transform: translateY(2px);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+  }
+  
+  .drawer {
+    width: 100%;
+    height: 80px;
+    background: linear-gradient(to bottom, #4a4a4a, #3a3a3a);
+    border-top: 3px solid #1a1a1a;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border-radius: 0 0 10px 10px;
+  }
+
+  /* .open {
+    width: 90%;
+    height: 160px;
+    background: linear-gradient(to bottom, #fafafa, #8b8989);
+    border-top: 3px solid #1a1a1a;
+    position: absolute;
+    bottom: -10vh;
+    left: 1vw;
+    border-radius: 0 0 10px 10px;
+    z-index:1;
+  } */
+  
+  .drawer-handle {
+    width: 80px;
+    height: 8px;
+    background-color: #1a1a1a;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 4px;
+    box-shadow: 0 -6px 0 #1a1a1a, 0 6px 0 #1a1a1a;
+  }
+  
+  
+  
+  .key.operation {
+    background: linear-gradient(145deg, #5a5a5a, #4a4a4a);
+    color: #ffd700;
+  }
+  
+ 
+  .key.equals {
+    background: linear-gradient(145deg, #4a6b4a, #3a5a3a);
+    color: #98ff98;
+  }
