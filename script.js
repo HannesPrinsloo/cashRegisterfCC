@@ -11,13 +11,32 @@ let cid = [
   ['ONE HUNDRED', 100]
 ];
 
+for (let i = 0; i < cid.length; i++) {
+    cid[i][1] = Math.round(cid[i][1] * 100);
+};
+
 const cash = document.getElementById("cash");
 const purchaseBtn = document.getElementById("purchase-btn");
 const changeDue = document.getElementById("change-due");
 const displayTotal = document.getElementById("display-total");
+const cidDisplay = document.querySelector(".cid");
+let drawerStatus = "CLOSED";
+
+const formatCidDisplay = () => {
+    cidDisplay.innerHTML = "";
+    for (let i = 0; i < cid.length; i++) {
+        cidDisplay.innerHTML += `<p>${cid[i][0]} = ${cid[i][1] / 100}<p>`;
+    }
+    cidDisplay.style.display = "block";
+    drawerStatus = "OPEN";
+};
+
+
+
 
 //variable to update after each successful transaction
 let runningTotal = 0;
+
 
 const totalInRegister = () => {
     let totalInCents = 0;
@@ -33,18 +52,26 @@ const calculateFunction = (cashInput, price) => {
     if (cashInput < price) {
         alert("Customer does not have enough money to purchase the item");
         cash.value = "";
+        cidDisplay.style.display = "none";
+        drawerStatus = "CLOSED";
         return;
     }
     if ((cashInput - price) > runningTotal) {
         console.log("Not enough cash in drawer");
         alert("Not enough cash in drawer");
         cash.value = "";
+        cidDisplay.style.display = "none";
+        drawerStatus = "CLOSED";
+
         return;
     }
     if (cashInput == parseFloat(price)) {
         console.log("No change due - customer paid with exact cash");
         changeDue.textContent = "No change due - customer paid with exact cash";
         cash.value = "";
+        cidDisplay.style.display = "none";
+        drawerStatus = "CLOSED";
+
         return;
     }
     if (cashInput > price && cashInput <= runningTotal) {
@@ -76,7 +103,15 @@ const calculateFunction = (cashInput, price) => {
       
             while (changeInCents >= denominationValue) {
               changeInCents -= denominationValue;
-              denominationsAndAmounts.push(denominationName);
+              denominationsAndAmounts.push([denominationName, (denominationValue / 100)]);
+              for (const name in cid) {
+                if (cid[name][1] > 0) {
+                    cid[name][1] -= denominationValue;
+                } else {
+                    // logic should subtract from lower denominations. Idfk how yet. 
+                }
+              }
+
             }
           }
 
@@ -84,43 +119,50 @@ const calculateFunction = (cashInput, price) => {
           for (let i = 0; i < cid.length; i++) {
             switch (denominationsAndAmounts[i]) {
                 case "ONE HUNDRED":
-                    cid[8][1] -= 100;
+                    cid[8][1] -= 10000;
                     break;
                 case "TWENTY":
-                    cid[7][1] -= 20;
+                    cid[7][1] -= 2000;
                     break;
                 case "TEN":
-                    cid[6][1] -= 10;
+                    cid[6][1] -= 1000;
                     break;
                 case "FIVE":
-                    cid[5][1] -= 5;
+                    cid[5][1] -= 500;
                     break;
                 case "ONE":
-                    cid[4][1] -= 1;
+                    cid[4][1] -= 100;
                     break;
                 case "QUARTER":
-                    cid[3][1] -= 0.25;
+                    cid[3][1] -= 25;
                     break;
                 case "DIME":
-                    cid[2][1] -= 0.10;
+                    cid[2][1] -= 10;
                     break;
                 case "NICKEL":
-                    cid[1][1] -= 0.5;
+                    cid[1][1] -= 5;
                     break;
                 case "PENNY":
-                    cid[0][1] -= 0.01;
+                    cid[0][1] -= 1;
                     break;
             }
           }
           console.log("CID - ", cid);
         
+
+        
         console.log("denominations and amounts: ", denominationsAndAmounts);
         console.log("changeInDollarsAfterDen - ", changeInCents / 100);
+        formatCidDisplay();
 
     }
 };
 
 //TODO html reset function
+const reset = () => {
+    cidDisplay.textContent = "";
+    drawerStatus = "CLOSED";
+}
 
 purchaseBtn.addEventListener("click", () => {
     //calculate function
