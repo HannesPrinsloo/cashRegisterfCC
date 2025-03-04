@@ -59,7 +59,9 @@ body {
 
   #change-due {
     position:absolute;
-    transform: translateX(-25vw);
+    bottom: 20vh;
+    left: 30%;
+    /* transform: translateX(-25vw); */
     color: white;
     font-family: 'Digital', monospace;
     font-size: 1.8em;
